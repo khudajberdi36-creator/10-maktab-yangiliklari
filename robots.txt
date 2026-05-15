@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://10-maktab-yangiliklari.vercel.app/sitemap.xml

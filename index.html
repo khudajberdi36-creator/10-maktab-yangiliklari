@@ -3,32 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MaktabNews — 10-Maktab Axborot Portali</title>
-<meta name="description" content="10-maktab o'quvchilari, o'qituvchilari va ota-onalari uchun eng so'nggi yangiliklar.">
-<meta property="og:title"       content="MaktabNews — 10-Maktab">
-<meta property="og:type"        content="website">
-<meta property="og:locale"      content="uz_UZ">
-<meta name="theme-color"        content="#0a1628">
 
-<!-- Favicon -->
+<!-- SEO ASOSIY -->
+<title>10-Maktab Yangiliklari | MaktabNews — Toshkent</title>
+<meta name="description"    content="Toshkent 10-maktab yangiliklari, tadbirlar va e'lonlar. O'quvchilar, o'qituvchilar va ota-onalar uchun rasmiy axborot portali.">
+<meta name="keywords"       content="10-maktab yangiliklari, 10 maktab toshkent, maktab yangiliklari, maktab axborot portali, o'quvchilar yangiliklari, maktab olimpiada, maktab tadbirlari">
+<meta name="author"         content="10-Maktab, Toshkent">
+<meta name="robots"         content="index, follow">
+<meta name="theme-color"    content="#0a1628">
+<link rel="canonical"       href="https://10-maktab-yangiliklari.vercel.app/">
+
+<!-- GOOGLE TASDIQLASH -->
+<meta name="google-site-verification" content="google52b13e6c7b65c3f5">
+
+<!-- OPEN GRAPH (Telegram, Facebook uchun) -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://10-maktab-yangiliklari.vercel.app/">
+<meta property="og:title"       content="10-Maktab Yangiliklari | MaktabNews">
+<meta property="og:description" content="Toshkent 10-maktab yangiliklari, tadbirlar va e'lonlar. O'quvchilar, o'qituvchilar va ota-onalar uchun rasmiy axborot portali.">
+<meta property="og:locale"      content="uz_UZ">
+<meta property="og:site_name"   content="MaktabNews — 10-Maktab">
+
+<!-- TWITTER CARD -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="10-Maktab Yangiliklari | MaktabNews">
+<meta name="twitter:description" content="Toshkent 10-maktab yangiliklari, tadbirlar va e'lonlar.">
+
+<!-- GOOGLE SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "10-Maktab Yangiliklari",
+  "alternateName": ["MaktabNews", "10 Maktab", "O'nchi Maktab Yangiliklari"],
+  "url": "https://10-maktab-yangiliklari.vercel.app/",
+  "description": "Toshkent 10-maktab yangiliklari, tadbirlar va e'lonlar",
+  "inLanguage": "uz",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://10-maktab-yangiliklari.vercel.app/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "Toshkent 10-Maktab",
+    "url": "https://10-maktab-yangiliklari.vercel.app/",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toshkent",
+      "addressCountry": "UZ"
+    }
+  }
+}
+<\/script>
+
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e8b84b'/><text y='72' x='50' font-size='60' text-anchor='middle' font-family='serif' font-weight='900' fill='%230a1628'>M</text></svg>">
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Shriftlar yuklanmasa ham sayt chiroyli ishlaydi */
+:root {
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+</style>
 
-<!-- DOMPurify — XSS himoya -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<!-- Supabase SDK -->
+<script src="supabase.min.js"></script>
+<!-- DOMPurify -->
+<script src="purify.min.js"></script>
 
-<!-- Alohida CSS -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     HEADER
-══════════════════════════════ -->
+<!-- HEADER -->
 <header>
   <div class="logo">
     <div class="logo-icon" aria-hidden="true">M</div>
@@ -39,57 +91,24 @@
   </div>
 
   <nav id="mainNav" aria-label="Asosiy navigatsiya">
-    <button class="filter-link active"
-            onclick="filterNews('all',this)"
-            style="background:none;border:none;cursor:pointer;padding:8px 15px;border-radius:8px;color:var(--gray);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;transition:.2s;">
-      Barchasi
-    </button>
-    <button class="filter-link"
-            onclick="filterNews('ta\'lim',this)"
-            style="background:none;border:none;cursor:pointer;padding:8px 15px;border-radius:8px;color:var(--gray);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;transition:.2s;">
-      📚 Ta'lim
-    </button>
-    <button class="filter-link"
-            onclick="filterNews('sport',this)"
-            style="background:none;border:none;cursor:pointer;padding:8px 15px;border-radius:8px;color:var(--gray);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;transition:.2s;">
-      ⚽ Sport
-    </button>
-
-    <button class="search-btn" onclick="openSearch()" aria-label="Qidirish (Ctrl+K)">
-      🔍 <span>Qidirish</span>
-    </button>
-
-    <!-- Dark/Light toggle -->
+    <button class="filter-link active" onclick="filterNews('all',this)">Barchasi</button>
+    <button class="filter-link" onclick="filterNews('ta\'lim',this)">📚 Ta'lim</button>
+    <button class="filter-link" onclick="filterNews('sport',this)">⚽ Sport</button>
+    <button class="search-btn" onclick="openSearch()" aria-label="Qidirish (Ctrl+K)">🔍 <span>Qidirish</span></button>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Mavzuni o'zgartirish">🌙</button>
-
-    <!-- Admin badge (faqat admin kirganda ko'rinadi) -->
     <span id="adminNavBtn" style="display:none;">
       <span class="admin-nav-badge">🔐 ADMIN</span>
     </span>
-
-    <!-- Yangilik qo'shish (faqat admin) -->
-    <button class="btn-post" id="postBtn" style="display:none" onclick="toggleForm()">
-      + Qo'shish
-    </button>
-
-    <!-- Admin kirish — ko'zga ko'rinmas tugma -->
-    <button class="admin-gear-btn"
-            id="adminAccessBtn"
-            onclick="openAdminLogin()"
-            title="Admin kirish (yoki ?admin=open)">
-      ⚙
-    </button>
+    <button class="btn-post" id="postBtn" style="display:none" onclick="toggleForm()">+ Qo'shish</button>
+    <button class="admin-gear-btn" id="adminAccessBtn" onclick="openAdminLogin()" title="Admin kirish">⚙</button>
   </nav>
 
-  <!-- Hamburger (mobil) -->
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menyuni ochish/yopish">
     <span></span><span></span><span></span>
   </button>
 </header>
 
-<!-- ══════════════════════════════
-     MOBILE DRAWER
-══════════════════════════════ -->
+<!-- MOBILE DRAWER -->
 <nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobil menyu">
   <button onclick="filterNews('all',null);closeMobileMenu()">🗞 Barchasi</button>
   <button onclick="filterNews('ta\'lim',null);closeMobileMenu()">📚 Ta'lim</button>
@@ -100,7 +119,7 @@
   <button onclick="filterNews('san\'at',null);closeMobileMenu()">🎨 San'at</button>
   <button onclick="filterNews('texnologiya',null);closeMobileMenu()">💻 Texnologiya</button>
   <hr style="border-color:var(--border2);margin:4px 0;">
-  <button onclick="openSearch();closeMobileMenu()">🔍 Qidirish (Ctrl+K)</button>
+  <button onclick="openSearch();closeMobileMenu()">🔍 Qidirish</button>
   <button onclick="toggleTheme();closeMobileMenu()" id="mobileThemeBtn">🌙 Mavzuni o'zgartirish</button>
   <button onclick="openAdminLogin();closeMobileMenu()">⚙ Admin kirish</button>
   <button class="m-btn-post" id="mobilePostBtn" onclick="toggleForm();closeMobileMenu()" style="display:none">
@@ -108,71 +127,45 @@
   </button>
 </nav>
 
-<!-- ══════════════════════════════
-     ADMIN BAR
-══════════════════════════════ -->
-<div class="admin-bar" id="adminBar" role="status" aria-label="Admin rejimi">
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar" role="status">
   <span class="admin-bar-label">🔐 Admin rejimi faol</span>
   <small class="admin-bar-hint">Yangilik qo'shish, tahrirlash, o'chirish mumkin</small>
   <button class="logout-btn" onclick="logoutAdmin()">Chiqish ✕</button>
 </div>
 
-<!-- ══════════════════════════════
-     SEARCH OVERLAY
-══════════════════════════════ -->
-<div class="search-overlay"
-     id="searchOverlay"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Qidiruv"
-     onclick="handleSearchOverlayClick(event)">
+<!-- DB STATUS BAR -->
+<div class="db-status-bar" id="dbStatusBar">
+  <span id="dbStatusText">🔄 Ma'lumotlar bazasiga ulanmoqda...</span>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" onclick="handleSearchOverlayClick(event)">
   <div class="search-box">
-    <input class="search-input"
-           id="searchInput"
-           placeholder="Yangilik qidiring..."
-           oninput="doSearch()"
-           aria-label="Qidiruv maydoni"
-           autocomplete="off">
-    <button class="search-close" onclick="closeSearch()" aria-label="Qidiruvni yopish">✕</button>
+    <input class="search-input" id="searchInput" placeholder="Yangilik qidiring..." oninput="doSearch()" autocomplete="off">
+    <button class="search-close" onclick="closeSearch()">✕</button>
   </div>
   <div class="search-results" id="searchResults" aria-live="polite"></div>
 </div>
 
-<!-- ══════════════════════════════
-     ADMIN LOGIN OVERLAY
-     URL: ?admin=open yoki ⚙ tugmasi
-══════════════════════════════ -->
-<div class="admin-overlay"
-     id="adminOverlay"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Admin kirish">
+<!-- ADMIN LOGIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay" role="dialog" aria-modal="true">
   <div class="admin-box">
     <div class="admin-logo" aria-hidden="true">M</div>
     <h2>Admin Paneli</h2>
-    <p>10-maktab MaktabNews boshqaruv tizimiga kirish<br>
-       <small style="color:var(--gray2);font-size:12px;">URL: <code style="color:var(--gold)">?admin=open</code> orqali ham ochish mumkin</small>
-    </p>
-    <input type="password"
-           class="admin-input"
-           id="adminPass"
+    <p>10-maktab MaktabNews boshqaruv tizimiga kirish</p>
+    <input type="password" class="admin-input" id="adminPass"
            placeholder="● ● ● ● ● ● ● ●"
            onkeydown="if(event.key==='Enter')checkPass()"
-           aria-label="Admin paroli"
-           autocomplete="current-password"
-           maxlength="64">
+           autocomplete="current-password" maxlength="64">
     <button class="admin-login-btn" onclick="checkPass()">🔓 Kirish</button>
-    <div class="admin-err" id="adminErr" role="alert">
-      ❌ Parol noto'g'ri! Qayta urinib ko'ring.
-    </div>
+    <div class="admin-err" id="adminErr">❌ Parol noto'g'ri!</div>
     <button class="admin-cancel" onclick="closeAdminLogin()">← Bekor qilish</button>
     <p class="admin-hint">Ruxsatsiz kirish urinishlari qayd etiladi</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     YANGILIKLAR TASMASI
-══════════════════════════════ -->
+<!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker" id="ticker">
     <span>Olimpiada g'oliblari taqdirlandi</span>
@@ -181,21 +174,14 @@
     <span>Ota-onalar yig'ilishi: 15-may, soat 17:00</span>
     <span>Yangi o'quv yili uchun ro'yxatga olish boshlandi</span>
     <span>Kimyo laboratoriyasi to'liq yangilandi</span>
-    <span>Cambridge ingliz tili imtihoniga tayyorgarlik kurslari boshlandi</span>
-    <!-- Tasma uzluksiz bo'lishi uchun takrorlash -->
     <span>Olimpiada g'oliblari taqdirlandi</span>
     <span>Matematika olimpiadasi natijalari e'lon qilindi</span>
     <span>Maktabimiz futbol jamoasi viloyat chempioni bo'ldi</span>
     <span>Ota-onalar yig'ilishi: 15-may, soat 17:00</span>
-    <span>Yangi o'quv yili uchun ro'yxatga olish boshlandi</span>
-    <span>Kimyo laboratoriyasi to'liq yangilandi</span>
-    <span>Cambridge ingliz tili imtihoniga tayyorgarlik kurslari boshlandi</span>
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-tag">
@@ -219,39 +205,18 @@
       <div class="stat-num" id="views-count">0</div>
       <div class="stat-label">Ko'rishlar</div>
     </div>
-    <div class="stat">
-      <div class="stat-num" id="visitors-count">0</div>
-      <div class="stat-label">Tashrif</div>
-    </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     ADMIN DASHBOARD
-══════════════════════════════ -->
+<!-- ADMIN DASHBOARD -->
 <section class="admin-dashboard" id="adminDashboard" aria-label="Admin boshqaruv paneli">
   <div class="dash-title">📊 Admin Paneli <span>BOSHQARUV</span></div>
   <div class="dash-grid" id="dashGrid"></div>
-  <div class="dash-section-title">👥 So'nggi tashrif buyuruvchilar</div>
-  <table class="visitors-table" aria-label="Tashrif buyuruvchilar jadvali">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Vaqt</th>
-        <th>Sahifa</th>
-        <th>Qurilma</th>
-        <th>Ko'rgan yangiliklar</th>
-      </tr>
-    </thead>
-    <tbody id="visitorsTableBody"></tbody>
-  </table>
   <div class="dash-section-title">🔥 Eng ko'p o'qilgan</div>
   <div id="topNewsList"></div>
 </section>
 
-<!-- ══════════════════════════════
-     POST / EDIT FORM
-══════════════════════════════ -->
+<!-- POST / EDIT FORM -->
 <section class="post-form" id="postForm" aria-label="Yangilik qo'shish shakli">
   <h2 class="form-title" id="formTitle">✏️ Yangi Yangilik Qo'shish</h2>
   <input type="hidden" id="f-edit-id" value="">
@@ -277,7 +242,7 @@
 
   <div class="form-group">
     <label for="f-desc">Qisqacha tavsif *</label>
-    <input type="text" id="f-desc" placeholder="Qisqacha tavsif (kartochkada ko'rinadi)..." maxlength="300">
+    <input type="text" id="f-desc" placeholder="Qisqacha tavsif..." maxlength="300">
   </div>
 
   <div class="form-group">
@@ -292,28 +257,13 @@
     </div>
     <div class="form-group">
       <label for="f-img">Rasm URL (ixtiyoriy)</label>
-      <input type="url" id="f-img" placeholder="https://..." pattern="https?://.*">
+      <input type="url" id="f-img" placeholder="https://...">
     </div>
-  </div>
-
-  <div class="form-group">
-    <label>Media fayl (rasm / video)</label>
-    <div class="file-drop">
-      <input type="file"
-             id="f-file"
-             accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm"
-             onchange="handleFile(event)"
-             aria-label="Fayl tanlash">
-      <div class="file-drop-icon">📁</div>
-      <p>Faylni bu yerga tashlang yoki <strong>tanlang</strong></p>
-      <p style="font-size:12px;margin-top:4px;color:var(--gray2)">JPG, PNG, WebP, GIF, MP4, WebM · Max 5MB</p>
-    </div>
-    <div id="file-preview" style="margin-top:12px;display:none"></div>
   </div>
 
   <div class="form-row" style="margin-bottom:20px">
     <label class="form-check">
-      <input type="checkbox" id="f-featured"> &nbsp; ⭐ Asosiy yangilik (kengaytirilgan)
+      <input type="checkbox" id="f-featured"> &nbsp; ⭐ Asosiy yangilik
     </label>
     <label class="form-check">
       <input type="checkbox" id="f-pinned"> &nbsp; 📌 Yuqoriga yopishtir
@@ -324,10 +274,8 @@
   <button class="cancel-form-btn" onclick="cancelForm()">✕ Bekor qilish</button>
 </section>
 
-<!-- ══════════════════════════════
-     FILTER BAR
-══════════════════════════════ -->
-<div class="filters" id="filterBar" role="toolbar" aria-label="Kategoriya filtrlari">
+<!-- FILTER BAR -->
+<div class="filters" id="filterBar" role="toolbar">
   <button class="filter-btn active" onclick="filterNews('all',this)">🗞 Barchasi</button>
   <button class="filter-btn" onclick="filterNews('ta\'lim',this)">📚 Ta'lim</button>
   <button class="filter-btn" onclick="filterNews('sport',this)">⚽ Sport</button>
@@ -336,67 +284,45 @@
   <button class="filter-btn" onclick="filterNews('fan',this)">🔬 Fan</button>
   <button class="filter-btn" onclick="filterNews('san\'at',this)">🎨 San'at</button>
   <button class="filter-btn" onclick="filterNews('texnologiya',this)">💻 Texnologiya</button>
-  <select class="sort-select" onchange="sortNews(this.value)" aria-label="Saralash tartibi">
+  <select class="sort-select" onchange="sortNews(this.value)">
     <option value="latest">🕐 Eng yangi</option>
     <option value="views">👁 Ko'p o'qilgan</option>
     <option value="reactions">❤️ Reaksiyalar</option>
   </select>
 </div>
 
-<!-- ══════════════════════════════
-     NEWS GRID
-══════════════════════════════ -->
+<!-- NEWS GRID -->
 <main>
-  <div class="news-grid" id="newsGrid" aria-live="polite" aria-label="Yangiliklar ro'yxati"></div>
-  <div class="pagination" id="paginationBar" aria-label="Sahifalar"></div>
+  <div class="news-grid" id="newsGrid" aria-live="polite"></div>
+  <div class="pagination" id="paginationBar"></div>
 </main>
 
-<!-- ══════════════════════════════
-     MODAL
-══════════════════════════════ -->
-<div class="modal-backdrop"
-     id="modal"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Yangilik tafsilotlari"
-     onclick="closeModalOutside(event)">
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" onclick="closeModalOutside(event)">
   <div class="modal" id="modalBox">
-    <!-- Progress bar -->
     <div class="modal-progress" aria-hidden="true">
       <div class="modal-progress-bar" id="modalProgressBar"></div>
     </div>
-
-    <button class="modal-close" onclick="closeModalBtn()" aria-label="Yopish (Esc)">✕</button>
-
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
     <div class="modal-media" id="modalMedia"></div>
-
     <div class="modal-body">
-      <div class="modal-cat"    id="modalCat"></div>
-      <h2 class="modal-title"  id="modalTitle"></h2>
-      <div class="modal-meta"  id="modalMeta"></div>
-
-      <!-- Actions -->
+      <div class="modal-cat"   id="modalCat"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-meta" id="modalMeta"></div>
       <div class="modal-actions">
-        <button class="share-btn" onclick="shareArticle()" id="shareBtn">📤 Ulashish</button>
+        <button class="share-btn" onclick="shareArticle()">📤 Ulashish</button>
         <button class="print-btn" onclick="window.print()">🖨️ Chop etish</button>
       </div>
-
       <div class="modal-content" id="modalContent"></div>
-
-      <!-- Reactions -->
-      <div class="reactions" id="modalReactions" aria-label="Reaksiyalar"></div>
-
-      <!-- Comments -->
+      <div class="reactions" id="modalReactions"></div>
       <div class="comments-section" id="commentsSection">
         <div class="comments-title">💬 Izohlar</div>
         <div id="commentsList" aria-live="polite"></div>
         <div class="add-comment">
-          <input class="comment-input"
-                 id="commentInput"
+          <input class="comment-input" id="commentInput"
                  placeholder="Fikringizni yozing..."
                  onkeydown="if(event.key==='Enter')submitComment()"
-                 maxlength="500"
-                 aria-label="Izoh yozish">
+                 maxlength="500">
           <button class="comment-submit" onclick="submitComment()">Yuborish</button>
         </div>
       </div>
@@ -404,24 +330,12 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     BACK TO TOP
-══════════════════════════════ -->
-<button class="back-to-top"
-        id="backToTop"
-        onclick="window.scrollTo({top:0,behavior:'smooth'})"
-        aria-label="Sahifa boshiga qaytish">
-  ↑
-</button>
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<!-- ══════════════════════════════
-     TOAST CONTAINER
-══════════════════════════════ -->
+<!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
 
-<!-- ══════════════════════════════
-     ALOHIDA JS FAYL
-══════════════════════════════ -->
 <script src="main.js"></script>
 </body>
 </html>
